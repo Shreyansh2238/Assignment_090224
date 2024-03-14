@@ -1,29 +1,33 @@
-#include<stdio.h>
-void main()
-{
-    int num,i,count=0,count2=0,j,s=0;
-    printf("Enter the number: ");
-    scanf("%d",&num);
-    for(i=num;i>0;i=i/10)
-    count++; 
-    printf("Number of digits :%d\n",count);
-    int d[10];
-    for(i=0;i<count;i++)
-    {
-        d[i]=num%10;
-        num=num/10;
+#include <stdio.h>
+
+int isPrime(int num) {
+    if (num <= 1) {
+        return 0;
     }
-    for(i=0;i<count;i++)
-    {
-        int ele=d[i];
-        count2=0;
-        for(j=i;j<count;j++)
-        {
-            if(d[j]==ele)
-            count2++;
+    for (int i = 2; i * i <= num; i++) {
+        if (num % i == 0) {
+            return 0;
         }
-        if(count2==1)
-        s=s+ele;
     }
-    printf("\nSum of the unique digits of the number: %d",s);
+    return 1;
+}
+
+void Range(int start, int end) {
+    printf("Prime numbers between %d and %d are:\n", start, end);
+    for (int i = start; i <= end; i++) {
+        if (isPrime(i)) {
+            printf("%d ", i);
+        }
+    }
+    printf("\n");
+}
+
+int main() {
+    int start, end;
+    printf("Input Lower Limit: ");
+    scanf("%d", &start);
+    printf("Input Upper Limit: ");
+    scanf("%d", &end);
+    Range(start, end);
+    return 0;
 }
